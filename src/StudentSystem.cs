@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.IO;
 
 class StudentSystem{
     private List<Student> students = new List<Student>();
@@ -57,6 +58,51 @@ class StudentSystem{
         }
         
 
+    }
+    public void SaveToFile(string path)
+    {
+        var lines = new List<string>();
+        foreach (var s in students)
+        {
+            string gradesJoined = string.Join(",", s.Grades);
+            lines.Add($"{s.Id}|{s.Name}|{gradesJoined}");
+        }
+        File.WriteAllLines(path, lines);
+        Console.WriteLine("Data saved.");
+    }
+
+    public void LoadFromFile(string path)
+    {
+        if (!File.Exists(path))
+        {
+            return; // nothing to load yet, first run
+        }
+
+        string[] lines = File.ReadAllLines(path);
+        int highestId = 0;
+
+        foreach (string line in lines)
+        {
+            string[] parts = line.Split('|');
+            int id = Convert.ToInt32(parts[0]);
+            string name = parts[1];
+
+            var grades = new List<int>();
+            if (parts[2].Length > 0) // handles a student with zero grades
+            {
+                foreach (string g in parts[2].Split(','))
+                {
+                    grades.Add(Convert.ToInt32(g));
+                }
+            }
+
+            var student = new Student { Id = id, Name = name, Grades = grades };
+            students.Add(student);
+
+            if (id > highestId) highestId = id;
+        }
+
+        nextId = highestId + 1;
     }
 
 
