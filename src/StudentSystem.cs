@@ -23,8 +23,8 @@ class StudentSystem{
             int grade = Convert.ToInt32(Console.ReadLine());
             student.Grades.Add(grade);
         }
-        AddStudent(student)
-        Console.WriteLine($"{student.name} has been added");
+        AddStudent(student);
+        Console.WriteLine($"{student.Name} has been added");
     }
     public void removeStudent(){
         Console.WriteLine("Enter id of Student to be Removed: ");
@@ -45,14 +45,16 @@ class StudentSystem{
             Console.WriteLine(s);
         }
     }
-    public var SearchStudent(){
-        console.WriteLine("Enter id of student you want to find: ");
-        int id = Convert.ToInt32(console.ReadLine());
-        var found  = students.FirstOrDefault(s => s.id = id);
-        if (found == null){
+    public void SearchStudent(){
+        Console.WriteLine("Enter id of student you want to find: ");
+        int id = Convert.ToInt32(Console.ReadLine());
+        var found  = students.FirstOrDefault(s => s.Id == id);
+        if (found != null){
+            Console.WriteLine(found);
+        }
+        else{
             Console.WriteLine("Student does not exist");
         }
-        return found;
         
 
     }

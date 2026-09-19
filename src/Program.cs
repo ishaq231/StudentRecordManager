@@ -3,14 +3,11 @@
     using System.Linq;
 
     class Program{
-        public void initiateSystem(var system){
+        static void Main(){
+            StudentSystem system = new StudentSystem();
             foreach (var s in Seed.GetStudents()){
                 system.AddStudent(s);
             }
-        }
-        static void Main(){
-            StudentSystem system = new StudentSystem();
-            initiateSystem(system);
             Console.WriteLine("Welcome to the Student Managment System ");
             while(true){
                 Console.WriteLine("Select from the following options: \n1. Add student \n2. Remove student\n3. List students \n4. Search Student \n5. Exit\n");
@@ -33,7 +30,8 @@
                         system.SearchStudent();
                         break;
                     case "5":
-                        break;
+                    Console.WriteLine("Bye");
+                        return;
                     default:
                     Console.WriteLine("Invalid Input");
                     break;
