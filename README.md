@@ -18,6 +18,7 @@ A console-based student record management system built in C#, written as a proje
 - LINQ (`FirstOrDefault`, filtering/searching)
 - File I/O (reading/writing plain text with a custom delimited format)
 - Console-based menu-driven program flow
+- Unit testing with xUnit (`[Fact]` tests, assertions, redirecting `Console` input/output, temp files for I/O tests)
 
 ## Project Structure
 
@@ -25,9 +26,12 @@ A console-based student record management system built in C#, written as a proje
 src/
 ├── Student.cs        # Represents a single student (Id, Name, Grades, GetAverage())
 ├── StudentSystem.cs  # Manages the collection of students (add, remove, search, list, save/load)
-├── Seed.cs           # Sample student data (unused now that file persistence is in place)
 ├── Program.cs        # Entry point and menu loop
 └── C#.csproj         # Project file
+tests/
+├── StudentTests.cs        # Unit tests for Student (averages, ToString)
+├── StudentSystemTests.cs  # Unit tests for StudentSystem (add, list, remove, search, save/load)
+└── Tests.csproj           # xUnit test project
 ```
 
 ## How to Run
@@ -39,6 +43,14 @@ dotnet run
 ```
 
 Student data is stored in `students.txt` (created automatically in the working directory the first time you exit).
+
+## Running the Tests
+
+The project has 12 xUnit unit tests. From the repository root:
+
+```bash
+dotnet test tests
+```
 
 ## Menu Options
 
